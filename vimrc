@@ -72,7 +72,9 @@ set encoding=utf8
 set fillchars+=vert:\ " use none for separator
 
 " Override color scheme to make split the same color as tmux's default
-hi VertSplit ctermbg=NONE guibg=NONE
+" hi VertSplit ctermbg=NONE guibg=NONE
+" hi NonText ctermfg=255 guifg=255
+hi vertsplit ctermfg=253 guibg=253
 
 set laststatus=2 " Always display the statusline in all windows
 "set showtabline=2 " Always display the tabline, even if there is only one tab
@@ -90,6 +92,14 @@ let g:lightline = {
       \ }
 
 let g:netrw_liststyle=3 " show tree in :E[xplore]
+"let g:netrw_list_hide= '.*\.swp$'
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize =35
+let g:netrw_chgwin=2
+let g:netrw_banner=0   " no banner
+
+let NERDTreeIgnore=['CVS']
 
 nnoremap <F5> :buffers<CR>:buffer<Space>
 set wildchar=<Tab> wildmenu wildmode=full
@@ -106,11 +116,18 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+inoremap jj <Esc>
+
 set splitbelow
 set splitright
 
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+
+cabbr <expr> %% expand('%:p:h')
+
+set cursorline
+hi CursorLine cterm=NONE ctermbg=254 guibg=254
 
 " tests
