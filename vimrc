@@ -68,7 +68,7 @@ set shortmess+=I " Hide welcome message
 
 " Set split separator to Unicode box drawing character
 set encoding=utf8
-"set fillchars=vert:▒
+"set fillchars=vert:|
 set fillchars+=vert:\ " use none for separator
 
 " Override color scheme to make split the same color as tmux's default
