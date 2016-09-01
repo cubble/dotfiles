@@ -1,0 +1,3 @@
+GREEN="\[$(tput setaf 24)\]"
+RESET="\[$(tput sgr0)\]"
+PS1="${GREEN}(\d \t) (\u@\h:\w)${RESET}\n\$ "
