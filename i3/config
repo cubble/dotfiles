@@ -151,6 +151,24 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+
+        colors {
+                background #121212
+                statusline #DDDDDD
+                separator  #666666
+
+                # focused_workspace  #4c7899 #285577 #ffffff
+                # active_workspace   #333333 #5f676a #ffffff
+                # inactive_workspace #333333 #222222 #888888
+                # urgent_workspace   #2f343a #900000 #ffffff
+                # binding_mode       #2f343a #900000 #ffffff
+
+                focused_workspace  #121212 #bcbcbc #121212
+                active_workspace   #121212 #5f676a #ffffff
+                inactive_workspace #121212 #222222 #888888
+                urgent_workspace   #2f343a #900000 #ffffff
+                binding_mode       #2f343a #900000 #ffffff
+        }
 }
 
 exec --no-startup-id feh --bg-scale /usr/share/images/desktop-base/lines-grub-1920x1080.png
