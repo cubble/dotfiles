@@ -151,11 +151,12 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        separator_symbol "«"
 
         colors {
                 background #121212
-                statusline #DDDDDD
-                separator  #666666
+                statusline #CDCDCD
+                separator  #999999
 
                 # focused_workspace  #4c7899 #285577 #ffffff
                 # active_workspace   #333333 #5f676a #ffffff
@@ -163,15 +164,24 @@ bar {
                 # urgent_workspace   #2f343a #900000 #ffffff
                 # binding_mode       #2f343a #900000 #ffffff
 
-                focused_workspace  #121212 #bcbcbc #121212
-                active_workspace   #121212 #5f676a #ffffff
-                inactive_workspace #121212 #222222 #888888
+                #focused_workspace  #121212 #bcbcbc #121212
+                focused_workspace  #121212 #007FFF #121212
+                active_workspace   #121212 #121212 #ffffff
+                inactive_workspace #121212 #121212 #AAAAAA
                 urgent_workspace   #2f343a #900000 #ffffff
                 binding_mode       #2f343a #900000 #ffffff
         }
 }
 
-exec --no-startup-id feh --bg-scale /usr/share/images/desktop-base/lines-grub-1920x1080.png
+##########
+# Custom #
+##########
 
+# Start programs (background wallpaper and network manager)
+exec --no-startup-id feh --bg-scale /usr/share/images/desktop-base/lines-grub-1920x1080.png
+exec --no-startup-id nm-applet
+
+# Hide window title and border
 new_window pixel 1
 hide_edge_borders both
+
