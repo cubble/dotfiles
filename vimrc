@@ -78,6 +78,7 @@ hi vertsplit ctermfg=253 guibg=253
 
 set laststatus=2 " Always display the statusline in all windows
 set showtabline=2 " Always display the tabline, even if there is only one tab
+" Test line. Delete when found.
 
 "set spell spelllang=en_us
 vnoremap . :norm.<CR>
