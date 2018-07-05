@@ -77,7 +77,7 @@ set fillchars+=vert:\ " use none for separator
 hi vertsplit ctermfg=253 guibg=253
 
 set laststatus=2 " Always display the statusline in all windows
-"set showtabline=2 " Always display the tabline, even if there is only one tab
+set showtabline=2 " Always display the tabline, even if there is only one tab
 
 "set spell spelllang=en_us
 vnoremap . :norm.<CR>
@@ -128,6 +128,6 @@ set softtabstop=4
 cabbr <expr> %% expand('%:p:h')
 
 set cursorline
-hi CursorLine cterm=NONE ctermbg=254 guibg=254
+" hi CursorLine cterm=NONE ctermbg=254 guibg=254
 
 " tests
