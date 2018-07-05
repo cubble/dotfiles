@@ -1,3 +1,4 @@
+" customized vimrc file
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
