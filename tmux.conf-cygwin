@@ -1,0 +1,116 @@
+source-file ${HOME}/Development/tmux-dev/tmux-themepack/basic.tmuxtheme
+
+# cheat-sheet
+# prefix + d -- detach window
+# prefix + c -- new window
+# prefix + w -- list windows
+# prefix + & -- kill window
+# prefix + , -- rename window
+#
+# prefix + x -- kill pane
+# prefix + z -- maximiaze pane
+#
+# prefix + M-Up -- resize-pane -U 5
+# prefix + M-Down -- resize-pane -D 5
+# prefix + M-Left -- resize-pane -L 5
+# prefix + M-Right -- resize-pane -R 5
+#
+# prefix + C-Up -- resize-pane -U
+# prefix + C-Down -- resize-pane -D
+# prefix + C-Left -- resize-pane -L
+# prefix + C-Right -- resize-pane -R
+#
+# prefix + M-1 -- switch to even-horizontal layout
+# prefix + M-2 -- switch to even-vertical layout
+# prefix + M-3 -- switch to main-horizontal layout
+# prefix + M-4 -- switch to main-vertical layout
+# prefix + M-5 -- switch to tiled layout
+# prefix + space -- switch to the next layout
+#
+# prefix + Ctrl-s -- tmux resurrect save
+# prefix + Ctrl-r -- tmux resurrect restore
+#
+# select-pane -t:.1 -P 'fg=black,bg=colour216'
+#
+# Hold SHIFT to use mouse double/triple select
+
+# split panes using | and -
+#bind | split-window -h
+bind \ split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# reload config file (change file location to your the tmux.conf you want to use)
+bind r source-file ~/.tmux.conf
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Enable mouse mode (tmux 2.1 and above)
+set -g mouse on
+
+# Set mode vi
+# Use 'Space' to start selection and 'Enter' to end
+# use 'q' to exit selection mode
+setw -g mode-keys vi
+bind -T copy-mode-vi v send-keys -X begin-selection
+
+# Yank selection in copy mode, copy to windows clipboard, cancel copy mode
+# -- alternate copy/paste for cygwin --
+# bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "cat > /dev/clipboard"
+# bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "cat > /dev/clipboard"
+# bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "cat > /dev/clipboard"
+# -- end --
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "putclip"
+bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "putclip"
+bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "putclip"
+bind -T copy-mode-vi r send-keys -X rectangle-toggle
+
+# Use shift+pgup/pgdown to scroll
+bind -n S-Pageup copy-mode -u
+bind -n S-Pagedown send-keys Pagedown
+bind -n S-Up send-keys -X cursor-up
+bind -n S-Down send-keys -X cursor-down
+
+# Ctrl+PgUp/PgDown to change window
+bind -n C-PageUp previous-window
+bind -n C-PageDown next-window
+
+bind -n C-n new-window
+
+# Copy selection buffer to cygwin clipboard
+bind -n C-t run "tmux save-buffer - > /dev/clipboard"
+
+# Run command on all panes
+bind -n C-x setw synchronize-panes
+bind a setw synchronize-panes
+
+set-option -s escape-time 0
+set-option -g status-position bottom
+
+# Limit window title length to 15 chars
+set-option -gw window-status-format " #I:#{=15:window_name}#F "
+set-option -gw window-status-current-format " #I:#{=15:window_name}#F "
+
+# Use 256 color terminal
+set -g default-terminal "screen-256color"
+
+# Tmux resurrect
+run-shell ${HOME}/Development/tmux-dev/tmux-resurrect/resurrect.tmux
+#run-shell ${HOME}/Development/tmux-dev/nord-tmux/nord.tmux
+
+#set inactive/active window styles
+set -g window-style 'fg=colour250,bg=colour238'
+set -g window-active-style 'fg=colour253,bg=colour237'
+
+# set the pane border colors
+#set -g pane-border-fg colour238
+set -g pane-border-fg colour244
+set -g pane-border-bg colour238
+#set -g pane-active-border-fg colour237
+set -g pane-active-border-fg colour244
+set -g pane-active-border-bg colour237
