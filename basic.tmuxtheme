@@ -1,0 +1,66 @@
+# Status update interval
+set -g status-interval 5
+
+# Basic status bar colors
+set -g status-style fg=colour81,bg=colour239
+set -g status-left-style fg=colour121,bg=colour239
+set -g status-right-style fg=colour81,bg=colour239
+
+# Lengths
+set -g status-left-length 40
+set -g status-right-length 40
+
+#set -g status-left "#S #[fg=white]» #[fg=yellow]#I #[fg=cyan]#P"
+set -g status-left "#S #[fg=white]» #[fg=yellow]#I #[fg=colour81]#P/#{window_panes} #[fg=white]» \
+#{?client_prefix,#[bg=cyan]#[fg=black] ↑ #[default],#[fg=colour252] ↑ #[default]}\
+#{?pane_in_mode,#[bg=yellow]#[fg=black] ✎ #[default],#[fg=colour252] ✎ #[default]}\
+#{?window_zoomed_flag,#[bg=colour43]#[fg=black] ⇱ #[default],#[fg=colour252] ⇱ #[default]}\
+#{?pane_synchronized,#[bg=colour211]#[fg=black] ❆ #[default],#[fg=colour252] ❆ #[default]}"
+
+# Right side of status bar
+set -g status-right "#H #[fg=white]« #[fg=yellow]%H:%M:%S #[fg=colour49]%d-%b-%y"
+
+# Window status
+#set -g window-status-format " #I.#{window_panes}:#W#F "
+#set -g window-status-current-format " #I.#{window_panes}:#W#F "
+set -g window-status-format " #I-#{=20:window_name} "
+set -g window-status-current-format " #I-#{=20:window_name} "
+setw -g window-status-current-style reverse #,dotted-underscore,overline
+setw -g window-status-style default
+
+# Window with activity status
+set -g window-status-activity-style "bg=yellow,fg=black" # fg and bg are flipped here due to a
+
+# Window separator
+set -g window-status-separator ""
+
+# Window status alignment
+set -g status-justify centre
+
+# Pane number indicator
+set -g display-panes-colour default
+set -g display-panes-active-colour default
+
+# Clock mode
+set -g clock-mode-colour red
+set -g clock-mode-style 24
+
+set -g message-style "bg=default,fg=default"
+set -g message-command-style "bg=default,fg=default"
+set -g mode-style bg=red,fg=default
+
+#set inactive/active window styles
+set -g window-style 'fg=colour250,bg=colour238'
+set -g window-active-style 'fg=colour253,bg=colour236'
+#set -g window-active-style 'fg=colour253,bg=#282a36'
+
+# set the pane border colors
+set -g pane-border-style 'fg=colour247,bg=colour238'
+set -g pane-active-border-style 'fg=colour247,bg=colour236'
+
+# Pane border ppearance
+set -g  pane-border-format ' #{?pane_active,#[fg=colour166]●#[fg=colour255],#[fg=colour255]#{pane_index}} #{pane_current_command} '
+set -g  pane-border-status top
+set -g  visual-activity on
+
+set -g pane-border-lines single

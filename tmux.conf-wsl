@@ -1,0 +1,153 @@
+#source-file ${HOME}/Development/tmux-dev/tmux-themepack/powerline/default/blue.tmuxtheme
+#set -g default-terminal "screen-256color"
+set -g default-terminal "screen-256color"
+set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+
+# cheat-sheet
+# prefix + d -- detach window
+# prefix + c -- new    window
+# prefix + w -- list   windows
+# prefix + & -- kill   window
+# prefix + , -- rename window
+#
+# prefix + x -- kill   pane
+# prefix + z -- maximiaze pane
+#
+# prefix + M-Up -- resize-pane -U 5
+# prefix + M-Down -- resize-pane -D 5
+# prefix + M-Left -- resize-pane -L 5
+# prefix + M-Right -- resize-pane -R 5
+#
+# prefix + C-Up -- resize-pane -U
+# prefix + C-Down -- resize-pane -D
+# prefix + C-Left -- resize-pane -L
+# prefix + C-Right -- resize-pane -R
+#
+# prefix + M-1 -- switch to even-horizontal layout
+# prefix + M-2 -- switch to even-vertical layout
+# prefix + M-3 -- switch to main-horizontal layout
+# prefix + M-4 -- switch to main-vertical layout
+# prefix + M-5 -- switch to tiled layout
+# prefix + space -- switch to the next layout
+#
+# prefix + Ctrl-s -- tmux resurrect save
+# prefix + Ctrl-r -- tmux resurrect restore
+#
+# select-pane -t:.1 -P 'fg=black,bg=colour216'
+#
+# Hold SHIFT to use mouse double/triple select
+# Hold ALT+SHIFT to use mouse rectangle select
+#
+# prefix + t -- clock
+
+# split panes using | and -
+#bind | split-window -h
+bind '\' split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# reload config file (change file location to your the tmux.conf you want to use)
+bind r source-file ~/.tmux.conf
+
+# switch windows alt+number
+bind-key -n M-1 select-window -t 1
+bind-key -n M-2 select-window -t 2
+bind-key -n M-3 select-window -t 3
+bind-key -n M-4 select-window -t 4
+bind-key -n M-5 select-window -t 5
+bind-key -n M-6 select-window -t 6
+bind-key -n M-7 select-window -t 7
+bind-key -n M-8 select-window -t 8
+bind-key -n M-9 select-window -t 9
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+#set -g -s terminal-features overline
+
+# Enable mouse mode (tmux 2.1 and above)
+#set -g mouse on
+
+# Set mode vi
+# Use 'Space' to start selection and 'Enter' to end
+# use 'q' to exit selection mode
+setw -g mode-keys vi
+bind -T copy-mode-vi v send-keys -X begin-selection
+
+# Yank selection in copy mode, copy to windows clipboard, cancel copy mode
+# -- alternate copy/paste for cygwin --
+# bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "cat > /dev/clipboard"
+# bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "cat > /dev/clipboard"
+# bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "cat > /dev/clipboard"
+# -- end --
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "/mnt/c/Windows/System32/clip.exe"
+bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "/mnt/c/Windows/System32/clip.exe"
+#bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "putclip"
+bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "/mnt/c/Windows/System32/clip.exe"
+bind -T copy-mode-vi r send-keys -X rectangle-toggle
+
+#Make Home & End keys work in copy mode
+bind-key -T copy-mode-vi 'Home' send -X start-of-line
+bind-key -T copy-mode-vi 'End' send -X end-of-line
+
+# Use shift+pgup/pgdown to scroll
+bind -n S-Pageup copy-mode -u
+bind -n S-Pagedown send-keys Pagedown
+bind -n S-Up send-keys -X cursor-up
+bind -n S-Down send-keys -X cursor-down
+
+# Ctrl+PgUp/PgDown to change window
+bind -n C-PageUp previous-window
+bind -n C-PageDown next-window
+
+bind -n C-n new-window
+
+# Copy selection buffer to cygwin clipboard
+#bind -n C-t run "tmux save-buffer - > /dev/clipboard"
+
+# Run command on all panes
+#bind -n C-x setw synchronize-panes
+bind -n F5 setw synchronize-panes
+bind a setw synchronize-panes
+bind -n C-Up resize-pane -Z
+bind -n C-Down resize-pane -Z
+bind -n F11 resize-pane -Z
+
+bind -n F2 command-prompt -I "#W" "rename-window '%%'"
+
+set-option -s escape-time 0
+set-option -g renumber-windows on
+#set-option -g status-position bottom
+
+# Start windows and panes at 1, not 0
+set -g base-index 1
+setw -g pane-base-index 1
+
+# disable mouse control by default - change 'off' to 'on' to enable by default.
+setw -g mouse on
+# toggle mouse mode to allow mouse copy/paste
+# set mouse on with prefix m
+bind m \
+    set -g mouse on \;\
+    display 'Mouse: ON'
+# set mouse off with prefix M
+bind M \
+    set -g mouse off \;\
+    display 'Mouse: OFF'
+# zoom this pane to full screen
+bind + \
+    new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read' \;\
+    swap-pane -s tmux-zoom.1 \;\
+    select-window -t tmux-zoom
+# restore this pane
+bind - \
+    last-window \;\
+    swap-pane -s tmux-zoom.1 \;\
+    kill-window -t tmux-zoom
+
+run-shell /home/harsh/deb_dev/git/extrakto/extrakto.tmux
+source-file ${HOME}/.basic.tmuxtheme
